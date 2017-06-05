@@ -1,0 +1,19 @@
+<h2>Home</h2>
+<form ng-submit="controller.save()">
+  <label for="name">Name</label>
+  <input type='text' ng-model="controller.thing.name" name="name"/>
+
+  <label for="property">Property</label>
+  <input type='text' ng-model="controller.thing.property" name="property"/>
+
+  <button type="submit">Add Thing</button>
+</form>
+
+<ul ng-repeat="thing in controller.things">
+  <li>
+    <h4>{{thing.name}}</h4>
+    <p>{{thing.property}}</p>
+    <a href="/edit/{{thing._id}}">edit</a>
+    <a href="#" ng-click="controller.delete(thing._id)">delete</a>
+  </li>
+</ul>
