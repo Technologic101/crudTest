@@ -7,7 +7,7 @@ let router = express.Router();
 router.get('/', (req, res) => {
   console.log('from router get /');
 
-  database.db.collections('stuff').find().toArray().then( (things)=>{
+  database.db.collection('stuff').find().toArray().then( (things)=>{
     res.json(things);
   })
 });
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   console.log('from router get/:id');
   let id = new mongodb.ObjectID(req.params['id']);
-  database.db.collections('stuff').findOne(id).then((thing)=> {
+  database.db.collection('stuff').findOne(id).then((thing)=> {
     res.json(thing);
   });
 })
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   let thing = req.body;
   thing._id = new mongodb.ObjectID(thing._id);
-  database.db.collections('stuff').save(thing).then((newThing) => {
+  database.db.collection('stuff').save(thing).then((newThing) => {
     res.json(newThing);
   });
 });
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req,res) => {
   let id = new mongodb.ObjectID(req.params['id']);
-  database.db.collections('stuff').remove({_id:id}).then(() => {
+  database.db.collection('stuff').remove({_id:id}).then(() => {
     res.sendStatus(200);
   });
 });
